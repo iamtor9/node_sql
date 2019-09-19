@@ -1,5 +1,34 @@
 # node_sql
-nstructions
+
+Well I am pretty excited about this. 
+I actually like working with SQL, and am obtaining a stronger concept for connecting to the database. Thanks to Chris, Daniel, and Syed for showing me some of their tricks for connecting!!! 
+
+Today thursday september 19th, 2019 it clicked for me that I must create the files within the selected folder.. BEFORE I do npm init.. npm etc....
+
+This was my biggest issue. Very thankful I understand that now.
+
+In this assignment I created a whiskey product inventory.
+<img src="images/image1.jpg">
+
+Here in the JS file is the code corresponding with the terminal input/output.
+<img src="images/img3.jpg">
+
+
+Here are examples for two different product names I inputed, in addition to the error/bug.
+WORKING
+<img src="">
+<img src="">
+<img src="">
+<img src="">
+<img src="">
+
+NOT WORKING BUG
+<img src="">
+<img src="">
+
+
+
+Instructions below:
 
 Challenge #1: Customer View (Minimum Requirement)
 Create a MySQL Database called bamazon.X
