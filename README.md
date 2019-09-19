@@ -8,23 +8,28 @@ Today thursday september 19th, 2019 it clicked for me that I must create the fil
 This was my biggest issue. Very thankful I understand that now.
 
 In this assignment I created a whiskey product inventory.
-<img src="images/image1.jpg">
+<img src="node_sql/images/termwhiskeylist.jpg">
 
 Here in the JS file is the code corresponding with the terminal input/output.
-<img src="images/img3.jpg">
+<img src="node_sql/images/UNADJUSTEDNONRAW_thumb_2807.jpg">
 
 
-Here are examples for two different product names I inputed, in addition to the error/bug.
-WORKING
-<img src="">
-<img src="">
-<img src="">
-<img src="">
-<img src="">
+Here are examples for jameson product I inputed.
+<img src="node_sql/images/termjameson.jpg">
 
-NOT WORKING BUG
-<img src="">
-<img src="">
+sql in VS code
+<img src="node_sql/images/sqlVs.jpg">
+
+whiskey list in term.
+<img src="node_sql/images/UNADJUSTEDNONRAW_thumb_280c.jpg">
+
+code ex:
+<img src="node_sql/images/code.png">
+<img src="node_sql/images/code1.png">
+<img src="node_sql/images/code2.png">
+
+
+
 
 
 
