@@ -84,11 +84,11 @@ let purchase = () => {
                         console.log("\n")
 
                         // the updating query string
-                        let updateQueryStr = "UPDATE products SET stock_quantity = " + (productInfo.stock_quantity - quantity) + " WHERE item_id = " + item
-                            // console.log('updateQueryStr = ' + updateQueryStr);
+                        let updateQS = "UPDATE products SET stock_quantity = " + (productInfo.stock_quantity - quantity) + " WHERE item_id = " + item
+                            // console.log('updateQS = ' + updateQS);
 
                         // Update the inventory
-                        connection.query(updateQueryStr, function(err, data) {
+                        connection.query(updateQS, function(err, data) {
                             if (err) throw err;
 
                             console.log("Your order has been placed!");
@@ -110,10 +110,7 @@ let purchase = () => {
                         setTimeout(function() { displayInventory() }, 3000)
                     }
                 console.log(prompt)
-
-                }
-            })
-
-
+            }
         })
+    })
 }
