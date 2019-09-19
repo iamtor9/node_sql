@@ -9,31 +9,31 @@ const connection = mysql.createConnection({
     //username, password, database
     user: "root",
     password: "root",
-    database: "bamazon"
+    database: "bamazon_db"
 });
 
 // connection to mysql server/sql db
-connection.connect(function(err) {
+connection.connect(function (err) {
     if (err) throw err
-// display the Inventory function after the connection has prompt the user with the questions
+    // display the Inventory function after the connection has prompt the user with the questions
     displayInventory()
 });
 console.log(connection)
 
 let displayInventory = () => {
-//console.log("SQL Connection Established")
-    connection.query("SELECT * FROM products", function(err, res) {
+    //console.log("SQL Connection Established")
+    connection.query("SELECT * FROM whiskey", function (err, res) {
         if (err) throw err
         for (let i = 0; i < res.length; i++) {
-            console.log("product name: " + res[i].item_id)
-            console.log("item: " + res[i].product_name)
+            console.log("product name: " + res[i].product_name)
+            console.log("stock_quantity: " + res[i].stock_quantity)
             console.log("price: $" + res[i].price)
         }
         purchase()
-    })
+    });
 };
 
-// validateInput makes sure that the user is supplying only positive integers for their inputs
+//validateInput makes sure that the user is supplying only positive integers for their inputs
 let validateInput = (value) => {
     let integer = Number.isInteger(parseFloat(value))
     let sign = Math.sign(value)
@@ -41,7 +41,7 @@ let validateInput = (value) => {
     if (integer && (sign === 1)) {
         return true;
     } else {
-        return 'Please enter number!'
+        return 'Enter Whiskey Quantity'
     }
 }
 
@@ -49,68 +49,70 @@ let validateInput = (value) => {
 let purchase = () => {
     inquirer.prompt([{
                 type: "input",
-                name: "item_id",
-                message: "Select the item you would like to purchase by product name.",
-                validate: validateInput,
-                filter: Number
+                name: "product_name",
+                message: "Please type the name of the whiskey you would like.",
+                //validate: validateInput,
+                //filter: Number
             },
+
             {
                 type: "input",
-                name: "quantity",
-                message: "How many of this item would you like to purchase?",
-                validate: validateInput,
-                filter: Number
+                name: "stock_quantity",
+                message: "How many bottles of this whiskey would you like?",
+                //validate: validateInput,
+                //filter: Number
             }
         ])
-        .then(function(purchase) {
-            let item = purchase.item_id
-            let quantity = purchase.quantity
+        .then(function (purchase) {
+                //.id or item_id -- currently a bug here
+                let item = purchase.product_name
+                let quantity = purchase.stock_quantity
+                let queryStr = "SELECT * FROM whiskey WHERE ?";
 
-            let queryStr = 'SELECT * FROM products WHERE ?';
+                connection.query(queryStr, {
+                        product_name: item
+                    }, function (err, res) {
+                        // if (err) throw err
 
-            connection.query(queryStr, { item_id: item }, function(err, res) {
-                if (err) throw err
+                        // if (res.length === 0) {
+                        //     console.log("ERROR: please enter number of bottles you would like.")
+                        //     displayInventory()
+                        // } else {
 
-                if (res.length === 0) {
-                    console.log("ERROR: Invalid Item ID. Please select a valid Item ID.")
-                    displayInventory()
-                } else {
+                        // set the results to the letiable of productInfo
+                        let productInfo = res[0]
 
-                    // set the results to the letiable of productInfo
-                    let productInfo = res[0]
+                        if (quantity <= productInfo.stock_quantity) {
+                            console.log(productInfo.product_name + "Whoohoo! It is available, order it now!!!")
 
-                    if (quantity <= productInfo.stock_quantity) {
-                        console.log(productInfo.product_name + "is in stock! Placing order now!")
-                        console.log("\n")
 
-                        // the updating query string
-                        let updateQS = "UPDATE products SET stock_quantity = " + (productInfo.stock_quantity - quantity) + " WHERE item_id = " + item
+                            // the updating query string
+                            let updateQS = "UPDATE whiskey SET stock_quantity = " + (productInfo.stock_quantity - quantity) + " WHERE product_name = " + item
                             // console.log('updateQS = ' + updateQS);
 
-                        // Update the inventory
-                        connection.query(updateQS, function(err, data) {
-                            if (err) throw err;
+                            // Update the inventory
+                            connection.query(updateQS, function (err, data) {
+                                if (err) throw err;
 
-                            console.log("Your order has been placed!");
-                            console.log("Your total is $" + productInfo.price * quantity)
-                            console.log("Thank you for shopping with bamazon!")
-                            console.log("To shop again with us please input 'node bamazonCustomer.js' into your command line again.")
+                                console.log("Your Whiskey is on the way!!!");
+                                console.log("total for your order is $" + productInfo.price * stock_quantity)
+                                console.log("Forgot something?? input 'node bamazon_db.js' in command terminal.")
+
+
+                                // connection.end function to end running db
+                                connection.end();
+                            })
+                        } else {
+                            console.log("Sorry, there is not enough " + productInfo.product_name + " in stock.")
+                            console.log("Your order can not be placed as is.")
+                            console.log("Please modify your order or select another item.")
                             console.log("\n")
 
-                            // End the database connection and close the app
-                            connection.end();
-                        })
-                    } else {
-                        console.log("Sorry, there is not enough " + productInfo.product_name + " in stock.")
-                        console.log("Your order can not be placed as is.")
-                        console.log("Please modify your order or select another item.")
-                        console.log("\n")
-
-                        // After 3 seconds display the inventory again so that the customer can make a new selcetion.
-                        setTimeout(function() { displayInventory() }, 3000)
+                            // After 3 seconds display the inventory again so that the customer can make a new selcetion.
+                            setTimeout(function () {
+                                displayInventory()
+                            }, 2000)
+                        
                     }
-                console.log(prompt)
-            }
-        })
-    })
-}
+                })
+        })}
