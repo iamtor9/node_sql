@@ -8,25 +8,25 @@ Today thursday september 19th, 2019 it clicked for me that I must create the fil
 This was my biggest issue. Very thankful I understand that now.
 
 In this assignment I created a whiskey product inventory.
-<img src="node_sql/images/termwhiskeylist.jpg">
+<img src="images/termwhiskeylist.jpg">
 
 Here in the JS file is the code corresponding with the terminal input/output.
-<img src="node_sql/images/UNADJUSTEDNONRAW_thumb_2807.jpg">
+<img src="images/UNADJUSTEDNONRAW_thumb_2807.jpg">
 
 
 Here are examples for jameson product I inputed.
-<img src="node_sql/images/termjameson.jpg">
+<img src="images/termjameson.jpg">
 
 sql in VS code
-<img src="node_sql/images/sqlVs.jpg">
+<img src="images/sqlVs.jpg">
 
 whiskey list in term.
-<img src="node_sql/images/UNADJUSTEDNONRAW_thumb_280c.jpg">
+<img src="images/UNADJUSTEDNONRAW_thumb_280c.jpg">
 
 code ex:
-<img src="node_sql/images/code.png">
-<img src="node_sql/images/code1.png">
-<img src="node_sql/images/code2.png">
+<img src="images/code.png">
+<img src="images/code1.png">
+<img src="/images/code2.png">
 
 
 
