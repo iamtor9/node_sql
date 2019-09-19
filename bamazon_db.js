@@ -41,7 +41,8 @@ let validateInput = (value) => {
     if (integer && (sign === 1)) {
         return true;
     } else {
-        return 'Enter Whiskey Quantity'
+        return "Enter Whiskey Quantity";
+        console.log(integer)
     }
 }
 
@@ -63,7 +64,8 @@ let purchase = () => {
                 //filter: Number
             }
         ])
-        .then(function (purchase) {
+    //I think  below is where the bug still is.
+        .then(function(purchase) {
                 //.id or item_id -- currently a bug here
                 let item = purchase.product_name
                 let quantity = purchase.stock_quantity
@@ -106,7 +108,7 @@ let purchase = () => {
                             console.log("Sorry, there is not enough " + productInfo.product_name + " in stock.")
                             console.log("Your order can not be placed as is.")
                             console.log("Please modify your order or select another item.")
-                            console.log("\n")
+                            
 
                             // After 3 seconds display the inventory again so that the customer can make a new selcetion.
                             setTimeout(function () {
